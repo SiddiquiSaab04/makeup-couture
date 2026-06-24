@@ -1,16 +1,16 @@
 import { motion } from "motion/react";
-import { Palette3D } from "./Palette3D";
+import lipsiticks from "@/assets/lipsiticks.jpg";
 
 export function Ritual() {
   return (
     <section id="ritual" className="relative w-full overflow-hidden py-24 md:py-36">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2">
-        <div className="relative h-[360px] md:h-[560px] md:order-2">
+        <div className="relative h-[360px] md:h-[560px]">
           <div className="absolute inset-0 rounded-full bg-primary/10 blur-[100px]" />
-          <Palette3D />
+          <img className="h-full w-full rounded-xl object-cover" src={lipsiticks} alt="Velour Lipsticks" />
         </div>
 
-        <div className="md:order-1">
+        <div>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

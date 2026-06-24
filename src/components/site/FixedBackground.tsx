@@ -1,6 +1,6 @@
-import { useScroll, useTransform, motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 
-import heroImg from "@/assets/hero.jpg";
+import modelPinkBg from "@/assets/model_pink_bg.png";
 
 /**
  * A single shared backdrop that persists behind every section.
@@ -19,7 +19,7 @@ export function FixedBackground() {
         className="absolute inset-0 bg-cover bg-center"
       >
         <img
-          src={heroImg}
+          src={modelPinkBg}
           alt=""
           className="h-full w-full object-cover blur-[2px]"
           width={1536}

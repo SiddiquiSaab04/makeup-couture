@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
 
-import lipglossImg from "@/assets/lipgloss.png";
-import paletteImg from "@/assets/palette.png";
-import compactImg from "@/assets/compact.png";
+import lipglossImg from "@/assets/neon_lipgloss.png";
+import paletteImg from "@/assets/neon_blush_palette.png";
+import compactImg from "@/assets/neon_compact.png";
 
 const rows = [
   {
@@ -63,7 +63,7 @@ function StackCard({
       className="absolute inset-0 flex items-center justify-center px-6"
     >
       <div
-        className={`grid w-full max-w-6xl items-center gap-8 rounded-[2rem] border border-border bg-card/80 p-6 backdrop-blur-xl md:grid-cols-2 md:gap-14 md:p-12 ${
+        className={`grid w-full min-w-6xl items-center gap-8 rounded-[2rem] border border-border bg-card/80 p-6 backdrop-blur-xl md:grid-cols-2 md:gap-14 md:p-12 ${
           reverse ? "md:[&>*:first-child]:order-2" : ""
         }`}
       >
@@ -77,7 +77,7 @@ function StackCard({
             loading="lazy"
             width={1024}
             height={1024}
-            className="absolute inset-0 h-full w-full scale-[1.02] object-contain p-8 drop-shadow-[0_30px_60px_oklch(0.68_0.27_356/0.45)] transition-transform duration-700 ease-out group-hover:scale-[1.12] group-hover:-rotate-3"
+            className="absolute inset-0 h-full w-full rounded-xl scale-[1.02] object-cover p-5  drop-shadow-[0_30px_60px_oklch(0.68_0.27_356/0.45)] transition-transform duration-700 ease-out group-hover:scale-[1.12] group-hover:-rotate-3"
           />
           <div className="absolute bottom-5 left-5 z-20 translate-y-3 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
             <span className="rounded-full bg-primary px-5 py-2 text-xs font-semibold uppercase tracking-widest text-primary-foreground shadow-[var(--glow-neon)]">

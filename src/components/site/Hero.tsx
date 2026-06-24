@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import heroImg from "@/assets/hero.jpg";
+import heroImg from "@/assets/hero_beauty_products.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -18,6 +18,7 @@ export function Hero() {
           width={1536}
           height={1024}
         />
+        <div className="absolute inset-0 bg-background/50" />
       </div>
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />

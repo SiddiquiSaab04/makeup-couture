@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
 
 import { ModelGallery } from "./ModelGallery";
-import aboutImg from "@/assets/about.jpg";
+import aboutImg from "@/assets/blushandhighlighter.jpg";
 
 const stats = [
   { value: "112", label: "Pigment shades" },
@@ -104,7 +104,7 @@ export function About() {
             style={{ y: imageY, scale: 1.2 }}
             src={aboutImg}
             alt="VELOUR cosmetics arranged on a charcoal surface"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
             loading="lazy"
             width={1024}
             height={1536}
