@@ -2,19 +2,29 @@ import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { gsap } from "gsap";
 
+import img1 from "@/assets/Brynleigh De La Pointe.jpg";
+import img2 from "@/assets/aynur-aydin-KIBfEAXNT6k-unsplash.jpg";
+import img3 from "@/assets/chalo-garcia-kwoAigKnlfo-unsplash.jpg";
+import img4 from "@/assets/creativefred-cmaG89fZ-wE-unsplash.jpg";
+import img5 from "@/assets/download.jpg";
+import img6 from "@/assets/049c77417678390aa81c3f962cb8e135.jpg";
+import img7 from "@/assets/a67ce7ed433c6b0bb95175ec9b4452b6.jpg";
+import img8 from "@/assets/d463071e4a9c7f3a7449562e43166fa3.jpg"
+
 type Model = {
   name: string;
   role: string;
-  seed: string;
+  img: string;
 };
 
 const models: Model[] = [
-  { name: "Aria", role: "The Muse", seed: "velour-face-11" },
-  { name: "Noor", role: "Neon Editorial", seed: "velour-face-22" },
-  { name: "Lena", role: "Velvet Glow", seed: "velour-face-37" },
-  { name: "Mara", role: "Charcoal Bloom", seed: "velour-face-48" },
-  { name: "Sade", role: "Liquid Light", seed: "velour-face-53" },
-  { name: "Yumi", role: "Spotlight Face", seed: "velour-face-69" },
+  { name: "Aria", role: "The Muse", img: img1 },
+  { name: "Noor", role: "Neon Editorial", img: img2 },
+  { name: "Lena", role: "Velvet Glow", img: img3 },
+  { name: "Mara", role: "Charcoal Bloom", img: img4 },
+  { name: "Sade", role: "Liquid Light", img: img5 },
+  { name: "Yumi", role: "Spotlight Face", img: img6 },
+  {name:"Elsa", role:"Charming Face", img:img7}
 ];
 
 function ModelCard({
@@ -28,11 +38,9 @@ function ModelCard({
     <article className="group relative h-full w-full shrink-0">
       <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)] transition-all duration-500 group-hover:border-primary group-hover:shadow-[var(--glow-neon)]">
         <img
-          src={`https://picsum.photos/seed/${model.seed}/700/940`}
+          src={model.img}
           alt={`VELOUR muse ${model.name}`}
           loading="lazy"
-          width={700}
-          height={940}
           className="h-full w-full scale-105 object-cover grayscale-[0.35] transition-all duration-[1.2s] ease-out group-hover:scale-110 group-hover:grayscale-0"
         />
 

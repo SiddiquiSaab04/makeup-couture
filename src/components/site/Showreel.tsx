@@ -29,6 +29,10 @@ export function Showreel() {
 
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center">
           <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: "-10%" }}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="group relative flex h-24 w-24 items-center justify-center rounded-full bg-primary/90 text-primary-foreground shadow-[var(--glow-neon)] backdrop-blur-sm"
@@ -39,12 +43,24 @@ export function Showreel() {
               <path d="M8 5v14l11-7z" />
             </svg>
           </motion.button>
-          <p className="mt-8 font-display text-3xl font-extrabold md:text-5xl">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            className="mt-8 font-display text-3xl font-extrabold md:text-5xl"
+          >
             Watch the <span className="neon-gradient-text">campaign film</span>
-          </p>
-          <p className="mt-3 text-sm uppercase tracking-[0.3em] text-muted-foreground">
+          </motion.p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, margin: "-10%" }}
+            className="mt-3 text-sm uppercase tracking-[0.3em] text-muted-foreground"
+          >
             SS25 — Colour, in motion
-          </p>
+          </motion.p>
         </div>
       </div>
     </section>

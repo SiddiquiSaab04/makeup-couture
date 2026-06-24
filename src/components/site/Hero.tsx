@@ -26,7 +26,8 @@ export function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease, delay: 0.2 }}
+          // Delayed to start right as the 2.8s intro screen fades out
+          transition={{ duration: 0.8, ease, delay: 3.0 }}
           className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-secondary"
         >
           <span className="h-px w-10 bg-secondary/60" />
@@ -39,7 +40,7 @@ export function Hero() {
               <motion.span
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
-                transition={{ duration: 1, ease, delay: 0.3 + i * 0.12 }}
+                transition={{ duration: 1, ease, delay: 3.1 + i * 0.12 }}
                 className={
                   i === 1 ? "inline-block neon-gradient-text text-glow" : "inline-block"
                 }
@@ -53,7 +54,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease, delay: 0.7 }}
+          transition={{ duration: 0.9, ease, delay: 3.5 }}
           className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
         >
           <p className="max-w-md text-base leading-relaxed text-muted-foreground">
@@ -84,7 +85,7 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
+        transition={{ delay: 4.0, duration: 1 }}
         className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground md:flex"
       >
         Scroll

@@ -54,10 +54,24 @@ export function Testimonials() {
   return (
     <section id="voices" className="relative w-full py-28 md:py-40">
       <div className="mx-auto max-w-5xl px-6 text-center">
-        <p className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary">Voices</p>
-        <h2 className="mb-16 font-display text-4xl font-extrabold md:text-6xl">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-10%" }}
+          className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary"
+        >
+          Voices
+        </motion.p>
+        <motion.h2 
+          initial={{ opacity: 0, scale: 0.9, filter: "blur(4px)" }}
+          whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-10%" }}
+          className="mb-16 font-display text-4xl font-extrabold md:text-6xl"
+        >
           Worn by the <span className="neon-gradient-text">front row.</span>
-        </h2>
+        </motion.h2>
 
         <div className="relative min-h-[230px] md:min-h-[200px]">
           <AnimatePresence mode="wait">

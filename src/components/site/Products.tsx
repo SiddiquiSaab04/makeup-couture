@@ -44,17 +44,35 @@ export function Products() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-10%" }}
+              className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary"
+            >
               The Collection
-            </p>
-            <h2 className="font-display text-4xl font-extrabold leading-[1.02] md:text-6xl">
+            </motion.p>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true, margin: "-10%" }}
+              className="font-display text-4xl font-extrabold leading-[1.02] md:text-6xl"
+            >
               Hover to <span className="neon-gradient-text">reveal.</span>
-            </h2>
+            </motion.h2>
           </div>
-          <p className="max-w-sm text-sm text-muted-foreground">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true, margin: "-10%" }}
+            className="max-w-sm text-sm text-muted-foreground"
+          >
             No grids, no clutter. Just colour, lifted off the page — move your cursor
             across the line to meet each piece.
-          </p>
+          </motion.p>
         </div>
 
         <div
@@ -78,15 +96,21 @@ export function Products() {
                 <img
                   src={active.img}
                   alt=""
-                  className="h-64 w-64 object-contain drop-shadow-[0_30px_60px_rgba(255,45,149,0.4)]"
+                  className="h-64 w-64 object-contain drop-shadow-[0_40px_80px_rgba(255,45,149,0.5)]"
                 />
               </motion.div>
             )}
           </AnimatePresence>
 
           <ul className="relative z-10 border-t border-border">
-            {products.map((p) => (
-              <li key={p.id}>
+            {products.map((p, index) => (
+              <motion.li 
+                key={p.id}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-10%" }}
+              >
                 <a
                   href="#products"
                   onMouseEnter={() => setActive(p)}
@@ -118,7 +142,7 @@ export function Products() {
                     </span>
                   </span>
                 </a>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>
