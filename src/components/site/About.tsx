@@ -2,6 +2,7 @@ import {useRef} from "react";
 import {useScroll, useTransform, motion} from "motion/react";
 
 import {ModelGallery} from "./ModelGallery";
+import {Palette3D} from "./Palette3D";
 import aboutImg from "@/assets/blushandhighlighter.jpg";
 
 const stats = [
@@ -203,28 +204,18 @@ export function About() {
                     </div>
                 </motion.div>
 
-                {/* Right — parallax image */}
+                {/* Right — 3D Palette canvas */}
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     viewport={{ once: true, margin: "-10%" }}
-                    className="relative h-[440px] overflow-hidden rounded-3xl md:h-[620px]"
+                    className="relative h-[440px] overflow-hidden rounded-3xl md:h-[620px] bg-card/10 border border-border/40"
                 >
-                    <motion.img style={
-                            {
-                                y: imageY,
-                                scale: 1.2
-                            }
-                        }
-                        src={aboutImg}
-                        alt="VELOUR cosmetics arranged on a charcoal surface"
-                        className="h-full w-full object-contain"
-                        loading="lazy"
-                        width={1024}
-                        height={1536}/>
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/50 to-transparent"/>
-                    <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-border"/>
+                    <div className="absolute inset-0 z-0 bg-[var(--gradient-radial-glow)] opacity-30" />
+                    <Palette3D />
+                    <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-background/40 to-transparent"/>
+                    <div className="pointer-events-none absolute inset-0 z-10 ring-1 ring-inset ring-border/50"/>
                 </motion.div>
             </div>
 

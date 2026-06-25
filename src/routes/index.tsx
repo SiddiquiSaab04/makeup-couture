@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { FixedBackground } from "@/components/site/FixedBackground";
+import { FloatingCompact } from "@/components/site/FloatingCompact";
 import { Navbar } from "@/components/site/Navbar";
 import { NeonCursor } from "@/components/site/NeonCursor";
 import { Hero } from "@/components/site/Hero";
@@ -40,6 +41,7 @@ function Index() {
       <div className="relative min-h-screen text-foreground">
         <IntroScreen />
         <FixedBackground />
+        <FloatingCompact />
         <Navbar />
         <NeonCursor />
 
