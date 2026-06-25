@@ -114,6 +114,7 @@ export function Products() {
                 <a
                   href="#products"
                   onMouseEnter={() => setActive(p)}
+                  data-cursor="view"
                   className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-border py-7 transition-colors md:gap-8 md:py-10"
                 >
                   <span className="font-display text-sm text-muted-foreground transition-colors group-hover:text-primary">

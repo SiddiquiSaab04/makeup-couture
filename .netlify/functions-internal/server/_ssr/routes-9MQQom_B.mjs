@@ -1,10 +1,10 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
+import { a as LinearFilter, i as useThree, l as require_jsx_runtime, n as Canvas, o as SRGBColorSpace, r as useFrame, s as Vector2, t as useTexture, u as require_react } from "../_libs/@react-three/drei+[...].mjs";
 import { t as Lenis } from "../_libs/lenis.mjs";
 import { t as gsapWithCSS } from "../_libs/gsap.mjs";
 import { i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion } from "../_libs/motion.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DfS5XXpD.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-9MQQom_B.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function SmoothScroll({ children }) {
@@ -190,70 +190,357 @@ function useIsMounted() {
 	return mounted;
 }
 function NeonCursor() {
-	const [isHovering, setIsHovering] = (0, import_react.useState)(false);
+	const [cursorState, setCursorState] = (0, import_react.useState)({
+		label: null,
+		isHovering: false,
+		isMagnetic: false,
+		magneticRect: null
+	});
 	const mounted = useIsMounted();
 	const mouseX = useMotionValue(-1e3);
 	const mouseY = useMotionValue(-1e3);
-	const springConfig = {
-		damping: 40,
-		stiffness: 150,
-		mass: .8
+	const auraSpringConfig = {
+		damping: 45,
+		stiffness: 120,
+		mass: 1
 	};
-	const auraX = useSpring(mouseX, springConfig);
-	const auraY = useSpring(mouseY, springConfig);
+	const auraX = useSpring(mouseX, auraSpringConfig);
+	const auraY = useSpring(mouseY, auraSpringConfig);
+	const ringSpringConfig = {
+		damping: 24,
+		stiffness: 180,
+		mass: .6
+	};
+	const ringX = useSpring(mouseX, ringSpringConfig);
+	const ringY = useSpring(mouseY, ringSpringConfig);
 	(0, import_react.useEffect)(() => {
 		if (window.matchMedia("(hover: none)").matches) return;
 		const handleMouseMove = (e) => {
-			mouseX.set(e.clientX);
-			mouseY.set(e.clientY);
-			if (e.target.closest("a, button, [role=\"button\"], img")) setIsHovering(true);
-			else setIsHovering(false);
+			const target = e.target;
+			if (!target) return;
+			const magneticTarget = target.closest("[data-cursor-magnetic]");
+			const cursorTarget = target.closest("[data-cursor]");
+			const label = cursorTarget ? cursorTarget.getAttribute("data-cursor") : null;
+			const isClickable = !!target.closest("a, button, [role=\"button\"], img, input, select, textarea, [onclick]");
+			if (magneticTarget) {
+				const rect = magneticTarget.getBoundingClientRect();
+				const centerX = rect.left + rect.width / 2;
+				const centerY = rect.top + rect.height / 2;
+				const borderRadius = window.getComputedStyle(magneticTarget).borderRadius || "9999px";
+				setCursorState({
+					label,
+					isHovering: true,
+					isMagnetic: true,
+					magneticRect: {
+						x: centerX,
+						y: centerY,
+						width: rect.width,
+						height: rect.height,
+						borderRadius
+					}
+				});
+				mouseX.set(centerX);
+				mouseY.set(centerY);
+			} else {
+				setCursorState({
+					label,
+					isHovering: isClickable,
+					isMagnetic: false,
+					magneticRect: null
+				});
+				mouseX.set(e.clientX);
+				mouseY.set(e.clientY);
+			}
 		};
 		window.addEventListener("mousemove", handleMouseMove, { passive: true });
 		return () => window.removeEventListener("mousemove", handleMouseMove);
 	}, [mouseX, mouseY]);
 	if (!mounted) return null;
+	const { label, isHovering, isMagnetic, magneticRect } = cursorState;
+	const ringWidth = isMagnetic && magneticRect ? magneticRect.width + 16 : label ? 80 : isHovering ? 48 : 32;
+	const ringHeight = isMagnetic && magneticRect ? magneticRect.height + 16 : label ? 80 : isHovering ? 48 : 32;
+	const ringBorderRadius = isMagnetic && magneticRect ? magneticRect.borderRadius : "50%";
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "pointer-events-none hidden md:block",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-			className: "fixed left-0 top-0 z-40 mix-blend-screen",
-			style: {
-				x: auraX,
-				y: auraY,
-				translateX: "-50%",
-				translateY: "-50%"
-			},
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-				animate: {
-					scale: isHovering ? 1.4 : 1,
-					opacity: isHovering ? .9 : .6
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+				className: "fixed left-0 top-0 z-40 mix-blend-screen",
+				style: {
+					x: auraX,
+					y: auraY,
+					translateX: "-50%",
+					translateY: "-50%"
 				},
-				transition: {
-					duration: .4,
-					ease: "easeOut"
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+					animate: {
+						scale: isHovering ? 1.3 : 1,
+						opacity: isHovering ? .8 : .5
+					},
+					transition: {
+						duration: .4,
+						ease: "easeOut"
+					},
+					className: "h-[250px] w-[250px] rounded-full bg-primary/25 blur-[75px]"
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+				className: "fixed left-0 top-0 z-50 mix-blend-screen",
+				style: {
+					x: ringX,
+					y: ringY,
+					translateX: "-50%",
+					translateY: "-50%"
 				},
-				className: "h-[300px] w-[300px] rounded-full bg-primary blur-[80px]"
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+					animate: {
+						width: ringWidth,
+						height: ringHeight,
+						borderRadius: ringBorderRadius,
+						borderColor: isMagnetic ? "rgba(186, 104, 200, 0.85)" : label ? "rgba(255, 45, 149, 0.9)" : "rgba(255, 255, 255, 0.4)",
+						backgroundColor: isMagnetic ? "rgba(186, 104, 200, 0.08)" : label ? "rgba(255, 45, 149, 0.15)" : "rgba(0, 0, 0, 0)"
+					},
+					transition: {
+						type: "spring",
+						damping: 24,
+						stiffness: 220,
+						mass: .4
+					},
+					className: "relative flex items-center justify-center border shadow-[0_0_15px_rgba(255,255,255,0.05)] text-white",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
+						mode: "wait",
+						children: label && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+							initial: {
+								opacity: 0,
+								scale: .6,
+								filter: "blur(4px)"
+							},
+							animate: {
+								opacity: 1,
+								scale: 1,
+								filter: "blur(0px)"
+							},
+							exit: {
+								opacity: 0,
+								scale: .6,
+								filter: "blur(4px)"
+							},
+							transition: { duration: .2 },
+							className: "font-accent text-[9px] font-black uppercase tracking-[0.25em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]",
+							children: label
+						}, label)
+					})
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+				className: "fixed left-0 top-0 z-[100]",
+				style: {
+					x: mouseX,
+					y: mouseY,
+					translateX: "-50%",
+					translateY: "-50%"
+				},
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+					animate: {
+						scale: isHovering ? 0 : 1,
+						opacity: isHovering ? 0 : .95
+					},
+					transition: { duration: .2 },
+					className: "h-2.5 w-2.5 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,1)]"
+				})
 			})
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-			className: "fixed left-0 top-0 z-[100]",
-			style: {
-				x: mouseX,
-				y: mouseY,
-				translateX: "-50%",
-				translateY: "-50%"
-			},
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-				animate: {
-					scale: isHovering ? .2 : 1,
-					opacity: isHovering ? 0 : .9
-				},
-				transition: { duration: .15 },
-				className: "h-[10px] w-[10px] rounded-full bg-white shadow-[0_0_20px_rgba(255,255,255,1)]"
-			})
-		})]
+		]
 	});
 }
 var pop_pink_hero_default = "/assets/pop_pink_hero-CfXSwlDC.png";
+var vertexShader = `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+var fragmentShader = `
+  precision highp float;
+  varying vec2 vUv;
+  uniform sampler2D uTexture;
+  uniform float uTime;
+  uniform float uStrength;
+  uniform vec2 uMouse;
+  uniform float uPlaneAspect;
+  uniform float uImageAspect;
+
+  void main() {
+    // cover-fit the image to the plane
+    vec2 ratio = vec2(
+      min(uPlaneAspect / uImageAspect, 1.0),
+      min(uImageAspect / uPlaneAspect, 1.0)
+    );
+    vec2 uv = vec2(
+      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+    );
+
+    // ripple emanating from the cursor (the "drop" effect)
+    vec2 diff = uv - uMouse;
+    float dist = length(diff * vec2(uPlaneAspect, 1.0));
+    float ripple = sin(dist * 40.0 - uTime * 5.0) * exp(-dist * 4.5);
+
+    // gentle idle drift so the surface always breathes
+    float idle = sin(uv.y * 14.0 + uTime * 0.8) * 0.0018
+               + cos(uv.x * 18.0 - uTime * 0.6) * 0.0014;
+
+    vec2 dir = normalize(diff + 0.0001);
+    // a constant hover term keeps a living ripple under the cursor even when still
+    vec2 offset = dir * ripple * (0.06 * (uStrength + 0.5)) + idle;
+
+    // chromatic aberration for a cinematic, liquid feel
+    float r = texture2D(uTexture, uv + offset * 1.0).r;
+    float g = texture2D(uTexture, uv + offset * 1.5).g;
+    float b = texture2D(uTexture, uv + offset * 2.1).b;
+    vec3 color = vec3(r, g, b);
+
+    // subtle vignette to seat the headline
+    float vig = smoothstep(1.15, 0.25, distance(vUv, vec2(0.5)));
+    color *= mix(0.62, 1.0, vig);
+
+    gl_FragColor = vec4(color, 1.0);
+  }
+`;
+function RippleMesh({ src }) {
+	const texture = useTexture(src);
+	const { viewport, pointer } = useThree();
+	const matRef = (0, import_react.useRef)(null);
+	const mouse = (0, import_react.useRef)(new Vector2(.5, .5));
+	const prevMouse = (0, import_react.useRef)(new Vector2(.5, .5));
+	const strength = (0, import_react.useRef)(0);
+	const uniforms = (0, import_react.useMemo)(() => {
+		const img = texture.image;
+		const imageAspect = img ? img.width / img.height : 1.5;
+		texture.minFilter = LinearFilter;
+		texture.colorSpace = SRGBColorSpace;
+		return {
+			uTexture: { value: texture },
+			uTime: { value: 0 },
+			uStrength: { value: 0 },
+			uMouse: { value: new Vector2(.5, .5) },
+			uPlaneAspect: { value: 1 },
+			uImageAspect: { value: imageAspect }
+		};
+	}, [texture]);
+	useFrame((_, delta) => {
+		if (!matRef.current) return;
+		const u = matRef.current.uniforms;
+		const tx = pointer.x * .5 + .5;
+		const ty = pointer.y * .5 + .5;
+		mouse.current.x += (tx - mouse.current.x) * .08;
+		mouse.current.y += (ty - mouse.current.y) * .08;
+		const vel = mouse.current.distanceTo(prevMouse.current);
+		prevMouse.current.copy(mouse.current);
+		strength.current += vel * 16;
+		strength.current *= .94;
+		strength.current = Math.min(strength.current, 2.2);
+		u.uTime.value += delta;
+		u.uStrength.value = strength.current;
+		u.uMouse.value.copy(mouse.current);
+		u.uPlaneAspect.value = viewport.width / viewport.height;
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("mesh", {
+		scale: [
+			viewport.width,
+			viewport.height,
+			1
+		],
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("planeGeometry", { args: [
+			1,
+			1,
+			1,
+			1
+		] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("shaderMaterial", {
+			ref: matRef,
+			vertexShader,
+			fragmentShader,
+			uniforms
+		})]
+	});
+}
+function RippleImage({ src }) {
+	const [lost, setLost] = (0, import_react.useState)(false);
+	if (lost) return null;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Canvas, {
+		dpr: [1, 1.6],
+		gl: {
+			antialias: true,
+			alpha: true,
+			powerPreference: "high-performance"
+		},
+		camera: {
+			position: [
+				0,
+				0,
+				1
+			],
+			fov: 50
+		},
+		style: {
+			width: "100%",
+			height: "100%"
+		},
+		onCreated: ({ gl }) => {
+			gl.domElement.addEventListener("webglcontextlost", (e) => {
+				e.preventDefault();
+				setLost(true);
+			}, { once: true });
+		},
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RippleMesh, { src })
+	});
+}
+function Magnetic({ children, range = 70, strength = .35 }) {
+	const ref = (0, import_react.useRef)(null);
+	const [isHovered, setIsHovered] = (0, import_react.useState)(false);
+	const x = useMotionValue(0);
+	const y = useMotionValue(0);
+	const springConfig = {
+		damping: 18,
+		stiffness: 120,
+		mass: .8
+	};
+	const springX = useSpring(x, springConfig);
+	const springY = useSpring(y, springConfig);
+	const handleMouseMove = (e) => {
+		if (!ref.current) return;
+		const { clientX, clientY } = e;
+		const rect = ref.current.getBoundingClientRect();
+		const centerX = rect.left + rect.width / 2;
+		const centerY = rect.top + rect.height / 2;
+		const deltaX = clientX - centerX;
+		const deltaY = clientY - centerY;
+		if (Math.hypot(deltaX, deltaY) < range) {
+			setIsHovered(true);
+			x.set(deltaX * strength);
+			y.set(deltaY * strength);
+		} else {
+			setIsHovered(false);
+			x.set(0);
+			y.set(0);
+		}
+	};
+	const handleMouseLeave = () => {
+		setIsHovered(false);
+		x.set(0);
+		y.set(0);
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+		ref,
+		onMouseMove: handleMouseMove,
+		onMouseLeave: handleMouseLeave,
+		style: {
+			x: springX,
+			y: springY
+		},
+		className: "inline-block",
+		children
+	});
+}
 var ease = [
 	.22,
 	1,
@@ -267,17 +554,24 @@ function Hero() {
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "absolute inset-0",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-					src: pop_pink_hero_default,
-					alt: "VELOUR neon compact powder and brushes",
-					className: "h-full w-full object-cover",
-					width: 1536,
-					height: 1024
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-background/30" })]
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: pop_pink_hero_default,
+						alt: "VELOUR neon compact powder and brushes",
+						className: "h-full w-full object-cover",
+						width: 1536,
+						height: 1024
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "absolute inset-0 z-10 hidden md:block",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RippleImage, { src: pop_pink_hero_default })
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 z-20 bg-background/30 pointer-events-none" })
+				]
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute inset-0 z-20 bg-gradient-to-b from-background/40 via-transparent to-background" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 md:pb-28",
+				className: "relative z-30 mx-auto w-full max-w-7xl px-6 pb-20 md:pb-28",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.p, {
 						initial: {
@@ -296,11 +590,11 @@ function Hero() {
 						className: "mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-secondary font-accent font-extrabold",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-px w-10 bg-secondary/60" }), "Luxury Beauty Collection"]
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
 						className: "font-display text-[clamp(4rem,12vw,14rem)] font-extrabold leading-[0.8] tracking-tight flex flex-col md:flex-row md:items-baseline md:gap-6",
-						children: [["Beauty,", "Redefined"].map((line, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						children: ["Beauty,", "Redefined"].map((line, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "block overflow-visible pb-4",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.span, {
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
 								initial: { y: "110%" },
 								animate: { y: 0 },
 								transition: {
@@ -308,10 +602,10 @@ function Hero() {
 									ease,
 									delay: 3.1 + i * .12
 								},
-								className: i === 1 ? "inline-block font-accent font-normal text-[clamp(4.5rem,14vw,16rem)] text-primary drop-shadow-[0_0_35px_rgba(255,45,149,0.9)]  pl-4 md:pl-0" : "inline-block text-foreground drop-shadow-2xl",
-								children: [line, " "]
+								className: i === 1 ? "inline-block font-accent font-normal text-[clamp(4.5rem,14vw,16rem)] text-primary drop-shadow-[0_0_35px_rgba(255,45,149,0.9)] pl-4 md:pl-0" : "inline-block text-foreground drop-shadow-2xl",
+								children: line
 							})
-						}, line)), " "]
+						}, line))
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
 						initial: {
@@ -332,18 +626,28 @@ function Hero() {
 							className: "max-w-md text-base leading-relaxed text-muted-foreground",
 							children: "Discover premium makeup essentials crafted to enhance your natural beauty. From flawless foundations to vibrant lip colors, every product is designed for confidence, elegance, and long-lasting performance."
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex flex-wrap items-center gap-4",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-								href: "#products",
-								className: "group inline-flex items-center gap-3 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--glow-neon)] transition-transform duration-300 hover:scale-[1.03]",
-								children: ["Shop Makeup", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "transition-transform duration-300 group-hover:translate-x-1",
-									children: "→"
-								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								href: "#about",
-								className: "inline-flex items-center gap-3 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:border-secondary hover:text-secondary",
-								children: "Our story"
+							className: "flex flex-wrap items-center gap-4 pointer-events-auto",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Magnetic, {
+								range: 80,
+								strength: .35,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+									href: "#products",
+									"data-cursor-magnetic": true,
+									className: "group inline-flex items-center gap-3 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--glow-neon)] transition-transform duration-300 hover:scale-[1.03]",
+									children: ["Shop Makeup", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "transition-transform duration-300 group-hover:translate-x-1",
+										children: "→"
+									})]
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Magnetic, {
+								range: 60,
+								strength: .3,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+									href: "#about",
+									"data-cursor-magnetic": true,
+									className: "inline-flex items-center gap-3 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:border-secondary hover:text-secondary",
+									children: "Our story"
+								})
 							})]
 						})]
 					})
@@ -356,7 +660,7 @@ function Hero() {
 					delay: 4,
 					duration: 1
 				},
-				className: "absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground md:flex",
+				className: "absolute bottom-6 left-1/2 z-30 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground md:flex",
 				children: ["Scroll", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-10 w-px animate-pulse bg-gradient-to-b from-secondary to-transparent" })]
 			})
 		]
@@ -1020,6 +1324,7 @@ function Products() {
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 							href: "#products",
 							onMouseEnter: () => setActive(p),
+							"data-cursor": "view",
 							className: "group grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-border py-7 transition-colors md:gap-8 md:py-10",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
@@ -1398,6 +1703,7 @@ function Showreel() {
 		ref,
 		className: "relative w-full px-6 py-10",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			"data-cursor": "play",
 			className: "relative mx-auto h-[70vh] max-w-7xl overflow-hidden rounded-[2rem]",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.video, {

@@ -3,8 +3,6 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
-import heroImg from "@/assets/hero.jpg";
-
 const vertexShader = /* glsl */ `
   varying vec2 vUv;
   void main() {
@@ -61,8 +59,8 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
-function RippleMesh() {
-  const texture = useTexture(heroImg);
+function RippleMesh({ src }: { src: string }) {
+  const texture = useTexture(src);
   const { viewport, pointer } = useThree();
   const matRef = useRef<THREE.ShaderMaterial>(null);
   const mouse = useRef(new THREE.Vector2(0.5, 0.5));
@@ -120,7 +118,7 @@ function RippleMesh() {
   );
 }
 
-export function RippleImage() {
+export function RippleImage({ src }: { src: string }) {
   const [lost, setLost] = useState(false);
 
   if (lost) return null;
@@ -143,7 +141,7 @@ export function RippleImage() {
         );
       }}
     >
-      <RippleMesh />
+      <RippleMesh src={src} />
     </Canvas>
   );
 }

@@ -15,7 +15,7 @@ export function Showreel() {
 
   return (
     <section ref={ref} className="relative w-full px-6 py-10">
-      <div className="relative mx-auto h-[70vh] max-w-7xl overflow-hidden rounded-[2rem]">
+      <div data-cursor="play" className="relative mx-auto h-[70vh] max-w-7xl overflow-hidden rounded-[2rem]">
         <motion.video
           style={{ scale, y }}
           src={campaignVideo}
