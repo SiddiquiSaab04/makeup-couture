@@ -39,7 +39,7 @@ export function Hero() {
                             delay: 3.0
                         }
                     }
-                    className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-secondary">
+                    className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-secondary font-accent font-extrabold">
                     <span className="h-px w-10 bg-secondary/60"/>
                     Luxury Beauty Collection
                 </motion.p>

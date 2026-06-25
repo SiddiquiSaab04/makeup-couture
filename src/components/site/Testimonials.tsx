@@ -32,7 +32,7 @@ export function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: "-10%" }}
-          className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary"
+          className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary font-accent"
         >
           Voices
         </motion.p>
