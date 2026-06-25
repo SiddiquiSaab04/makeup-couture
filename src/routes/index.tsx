@@ -18,13 +18,13 @@ import { IntroScreen } from "@/components/site/IntroScreen";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VELOUR — Makeup in Motion" },
+      { title: "VELOUR Makeup" },
       {
         name: "description",
         content:
           "A cinematic beauty house. Neon-charged colour, sculptural compacts and brushes, crafted to move with you.",
       },
-      { property: "og:title", content: "VELOUR — Makeup in Motion" },
+      { property: "og:title", content: "VELOUR Makeup" },
       {
         property: "og:description",
         content: "A cinematic beauty house. Neon-charged colour crafted to move with you.",
