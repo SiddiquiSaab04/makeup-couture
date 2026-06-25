@@ -8,10 +8,11 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     if (prefersReduced) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.8,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.6,
+      wheelMultiplier: 1.15, // Speeds up mouse wheel scroll travel
+      touchMultiplier: 1.2,
     });
 
     // Sync GSAP's ticker with Lenis for perfectly buttery, stutter-free animations

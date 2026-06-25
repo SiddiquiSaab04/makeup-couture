@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Magnetic } from "@/components/site/Magnetic";
 
 const links = [
   { label: "Story", href: "#about" },
@@ -33,39 +32,31 @@ export function Navbar() {
             : "py-6"
         }`}
       >
-        <Magnetic range={30} strength={0.25}>
-          <a
-            href="#home"
-            data-cursor-magnetic
-            className="font-display text-xl font-extrabold tracking-[0.2em] text-foreground block"
-          >
-            VEL<span className="neon-gradient-text">OUR</span>
-          </a>
-        </Magnetic>
+        <a
+          href="#home"
+          className="font-display text-xl font-extrabold tracking-[0.2em] text-foreground"
+        >
+          VEL<span className="neon-gradient-text">OUR</span>
+        </a>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-9 md:flex">
           {links.map((l) => (
-            <Magnetic key={l.href} range={35} strength={0.3}>
-              <a
-                href={l.href}
-                data-cursor-magnetic
-                className="story-link text-sm font-medium text-muted-foreground transition-colors hover:text-foreground block px-2.5 py-1"
-              >
-                {l.label}
-              </a>
-            </Magnetic>
+            <a
+              key={l.href}
+              href={l.href}
+              className="story-link text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {l.label}
+            </a>
           ))}
         </nav>
 
-        <Magnetic range={40} strength={0.35}>
-          <a
-            href="#products"
-            data-cursor-magnetic
-            className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm border transition-transform duration-300 hover:scale-[1.04] block"
-          >
-            Shop
-          </a>
-        </Magnetic>
+        <a
+          href="#products"
+          className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm border transition-transform duration-300 hover:scale-[1.04]"
+        >
+          Shop
+        </a>
       </div>
     </motion.header>
   );
