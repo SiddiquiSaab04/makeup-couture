@@ -46,7 +46,7 @@ export function Hero() {
 
                 <h1 className="font-display text-[clamp(4rem,12vw,14rem)] font-extrabold leading-[0.8] tracking-tight flex flex-col md:flex-row md:items-baseline md:gap-6">
                     {
-                    ["Beauty," ,"Redefined"].map((line, i) => (
+                    ["Beauty,", "Redefined"].map((line, i) => (
                         <span key={line}
                             className="block overflow-visible pb-4">
                             <motion.span initial={
@@ -92,8 +92,8 @@ export function Hero() {
                     className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                     <p className="max-w-md text-base leading-relaxed text-muted-foreground">
                         Discover premium makeup essentials crafted to enhance your natural beauty.
-                            From flawless foundations to vibrant lip colors, every product is designed
-                            for confidence, elegance, and long-lasting performance.
+                                                    From flawless foundations to vibrant lip colors, every product is designed
+                                                    for confidence, elegance, and long-lasting performance.
                     </p>
 
                     <div className="flex flex-wrap items-center gap-4">
