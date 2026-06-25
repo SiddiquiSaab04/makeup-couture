@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
+import testimonialsData from "@/data/testimonials.json";
+
 type Voice = {
   quote: string;
   name: string;
@@ -8,36 +10,7 @@ type Voice = {
   initials: string;
 };
 
-const voices: Voice[] = [
-  {
-    quote:
-      "It photographs like a dream. The compact catches studio light exactly the way the brand promises — my MUA kit has never looked this good.",
-    name: "Amara Hale",
-    role: "Editorial Makeup Artist",
-    initials: "AH",
-  },
-  {
-    quote:
-      "The neon velvet lipstick lasted a full 12-hour shoot day, two coffees and a sandwich. Genuinely cinematic colour payoff.",
-    name: "Priya Nair",
-    role: "Beauty Editor",
-    initials: "PN",
-  },
-  {
-    quote:
-      "I bought the Bloom palette for the packaging and stayed for the formula. It blends like a daydream and the case feels like jewellery.",
-    name: "Sofia Marchetti",
-    role: "Creative Director",
-    initials: "SM",
-  },
-  {
-    quote:
-      "Charcoal and neon shouldn't work together this well. VELOUR made the boldest pink I own somehow wearable to the office.",
-    name: "Dani Brooks",
-    role: "Founder, Loft Studio",
-    initials: "DB",
-  },
-];
+const voices: Voice[] = testimonialsData;
 
 export function Testimonials() {
   const [index, setIndex] = useState(0);

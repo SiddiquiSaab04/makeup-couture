@@ -1,97 +1,131 @@
-import { motion } from "motion/react";
-import heroImg from "@/assets/hero_beauty_products.png";
+import {motion} from "motion/react";
+import heroImg from "@/assets/pop_pink_hero.png";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Hero() {
-  return (
-    <section
-      id="home"
-      className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden"
-    >
-      {/* Static hero image */}
-      <div className="absolute inset-0">
-        <img
-          src={heroImg}
-          alt="VELOUR neon compact powder and brushes"
-          className="h-full w-full object-cover"
-          width={1536}
-          height={1024}
-        />
-        <div className="absolute inset-0 bg-background/50" />
-      </div>
+    return (
+        <section id="home" className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden">
+            {/* Static hero image */}
+            <div className="absolute inset-0">
+                <img src={heroImg}
+                    alt="VELOUR neon compact powder and brushes"
+                    className="h-full w-full object-cover"
+                    width={1536}
+                    height={1024}/>
+                <div className="absolute inset-0 bg-background/30"/>
+            </div>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background"/>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 md:pb-28">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          // Delayed to start right as the 2.8s intro screen fades out
-          transition={{ duration: 0.8, ease, delay: 3.0 }}
-          className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-secondary"
-        >
-          <span className="h-px w-10 bg-secondary/60" />
-          Cinematic Beauty House
-        </motion.p>
+            <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 md:pb-28">
+                <motion.p initial={
+                        {
+                            opacity: 0,
+                            y: 20
+                        }
+                    }
+                    animate={
+                        {
+                            opacity: 1,
+                            y: 0
+                        }
+                    }
+                    // Delayed to start right as the 2.8s intro screen fades out
+                    transition={
+                        {
+                            duration: 0.8,
+                            ease,
+                            delay: 3.0
+                        }
+                    }
+                    className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-secondary">
+                    <span className="h-px w-10 bg-secondary/60"/>
+                    Luxury Beauty Collection
+                </motion.p>
 
-        <h1 className="font-display text-[clamp(3rem,11vw,11rem)] font-extrabold leading-[0.85] tracking-tight">
-          {["Colour,", "in motion."].map((line, i) => (
-            <span key={line} className="block overflow-hidden">
-              <motion.span
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, ease, delay: 3.1 + i * 0.12 }}
-                className={
-                  i === 1 ? "inline-block neon-gradient-text text-glow" : "inline-block"
+                <h1 className="font-display text-[clamp(3rem,11vw,11rem)] font-extrabold leading-[0.85] tracking-tight">
+                    {
+                    ["Beauty," ,"Redefined"].map((line, i) => (
+                        <span key={line}
+                            className="block overflow-hidden">
+                            <motion.span initial={
+                                    {y: "110%"}
+                                }
+                                animate={
+                                    {y: 0}
+                                }
+                                transition={
+                                    {
+                                        duration: 1,
+                                        ease,
+                                        delay: 3.1 + i * 0.12
+                                    }
+                                }
+                                className={
+                                    i === 1 ? "inline-block neon-gradient-text text-glow" : "inline-block"
+                            }>
+                                {line} </motion.span>
+                        </span>
+                    ))
+                } </h1>
+
+                <motion.div initial={
+                        {
+                            opacity: 0,
+                            y: 24
+                        }
+                    }
+                    animate={
+                        {
+                            opacity: 1,
+                            y: 0
+                        }
+                    }
+                    transition={
+                        {
+                            duration: 0.9,
+                            ease,
+                            delay: 3.5
+                        }
+                    }
+                    className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                    <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+                        Discover premium makeup essentials crafted to enhance your natural beauty.
+                            From flawless foundations to vibrant lip colors, every product is designed
+                            for confidence, elegance, and long-lasting performance.
+                    </p>
+
+                    <div className="flex flex-wrap items-center gap-4">
+                        <a href="#products" className="group inline-flex items-center gap-3 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--glow-neon)] transition-transform duration-300 hover:scale-[1.03]">
+                            Shop Makeup
+                            <span className="transition-transform duration-300 group-hover:translate-x-1">
+                                →
+                            </span>
+                        </a>
+                        <a href="#about" className="inline-flex items-center gap-3 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:border-secondary hover:text-secondary">
+                            Our story
+                        </a>
+                    </div>
+                </motion.div>
+            </div>
+
+            <motion.div initial={
+                    {opacity: 0}
                 }
-              >
-                {line}
-              </motion.span>
-            </span>
-          ))}
-        </h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease, delay: 3.5 }}
-          className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
-        >
-          <p className="max-w-md text-base leading-relaxed text-muted-foreground">
-            Pigments that move with you. Sculptural compacts, hand-finished brushes and
-            liquid colour — engineered for the spotlight.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <a
-              href="#products"
-              className="group inline-flex items-center gap-3 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-[var(--glow-neon)] transition-transform duration-300 hover:scale-[1.03]"
-            >
-              Shop the collection
-              <span className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </a>
-            <a
-              href="#about"
-              className="inline-flex items-center gap-3 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-colors hover:border-secondary hover:text-secondary"
-            >
-              Our story
-            </a>
-          </div>
-        </motion.div>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 4.0, duration: 1 }}
-        className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground md:flex"
-      >
-        Scroll
-        <span className="h-10 w-px animate-pulse bg-gradient-to-b from-secondary to-transparent" />
-      </motion.div>
-    </section>
-  );
+                animate={
+                    {opacity: 1}
+                }
+                transition={
+                    {
+                        delay: 4.0,
+                        duration: 1
+                    }
+                }
+                className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground md:flex">
+                Scroll
+                <span className="h-10 w-px animate-pulse bg-gradient-to-b from-secondary to-transparent"/>
+            </motion.div>
+        </section>
+    );
 }

@@ -9,8 +9,8 @@ import modelPinkBg from "@/assets/model_pink_bg.png";
  */
 export function FixedBackground() {
   const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.6, 1], [0, 0.12, 0.22, 0.16]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1.3]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.6, 1], [0.2, 0.4, 0.6, 0.4]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1.4]);
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background">
@@ -21,16 +21,30 @@ export function FixedBackground() {
         <img
           src={modelPinkBg}
           alt=""
-          className="h-full w-full object-cover blur-[2px]"
+          className="h-full w-full object-cover blur-[1px] brightness-110 contrast-125"
           width={1536}
           height={1024}
         />
       </motion.div>
 
-      {/* themed glows */}
-      <div className="absolute -left-40 top-1/4 h-[40rem] w-[40rem] rounded-full bg-primary/10 blur-[140px]" />
-      <div className="absolute -right-40 top-2/3 h-[36rem] w-[36rem] rounded-full bg-secondary/10 blur-[140px]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/80" />
+      {/* themed animated glows */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -left-40 top-1/4 h-[50rem] w-[50rem] rounded-full bg-primary/30 blur-[150px] mix-blend-screen" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.3, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute -right-40 top-2/3 h-[45rem] w-[45rem] rounded-full bg-secondary/30 blur-[150px] mix-blend-screen" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/60" />
     </div>
   );
 }
