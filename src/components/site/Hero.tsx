@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import heroImg from "@/assets/pop_pink_hero.png";
-import { RippleImage } from "@/components/site/RippleImage";
 import { Magnetic } from "@/components/site/Magnetic";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -17,9 +16,6 @@ export function Hero() {
           width={1536}
           height={1024}
         />
-        <div className="absolute inset-0 z-10 hidden md:block">
-          <RippleImage src={heroImg} />
-        </div>
         <div className="absolute inset-0 z-20 bg-background/30 pointer-events-none" />
       </div>
 

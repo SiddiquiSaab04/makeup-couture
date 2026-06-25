@@ -1,12 +1,11 @@
 import { o as __toESM } from "../_runtime.mjs";
-import { l as require_jsx_runtime, u as require_react } from "../_libs/@react-three/drei+[...].mjs";
+import { n as require_jsx_runtime, r as require_react, t as QueryClientProvider } from "../_libs/react+tanstack__react-query.mjs";
 import { M as useRouter, c as HeadContent, d as Outlet, f as lazyRouteComponent, h as Link, m as createRootRouteWithContext, p as createFileRoute, s as Scripts, u as createRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
-import { t as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-Bb3aT3AQ.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-DAAPWOP-.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-D3I9GGgG.css";
+var styles_default = "/assets/styles-Ccv8VrKK.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -192,7 +191,7 @@ var Route$1 = createFileRoute("/sitemap.xml")({ server: { handlers: { GET: async
 		"Cache-Control": "public, max-age=3600"
 	} });
 } } } });
-var $$splitComponentImporter = () => import("./routes-b27Z_RaF.mjs");
+var $$splitComponentImporter = () => import("./routes-DbuHcz0A.mjs");
 var Route = createFileRoute("/")({
 	head: () => ({ meta: [
 		{ title: "VELOUR Makeup" },

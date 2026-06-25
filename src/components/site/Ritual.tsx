@@ -6,9 +6,9 @@ export function Ritual() {
         <section id="ritual" className="relative w-full overflow-hidden py-24 md:py-36">
             <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2">
                 <motion.div 
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    initial={{ opacity: 0, x: -80, scale: 0.95 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                     viewport={{ once: true, margin: "-10%" }}
                     className="relative h-[360px] md:h-[560px]"
                 >

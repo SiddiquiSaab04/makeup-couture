@@ -1,5 +1,5 @@
 import { a as __toCommonJS, n as __esmMin, o as __toESM, r as __exportAll } from "../_runtime.mjs";
-import { l as require_jsx_runtime, u as require_react } from "./@react-three/drei+[...].mjs";
+import { n as require_jsx_runtime, r as require_react } from "./react+tanstack__react-query.mjs";
 //#region node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs
 var import_jsx_runtime = require_jsx_runtime();
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
