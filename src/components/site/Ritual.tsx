@@ -5,12 +5,18 @@ export function Ritual() {
     return (
         <section id="ritual" className="relative w-full overflow-hidden py-24 md:py-36">
             <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2">
-                <div className="relative h-[360px] md:h-[560px]">
+                <motion.div 
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    className="relative h-[360px] md:h-[560px]"
+                >
                     <div className="absolute inset-0 rounded-full bg-primary/10 blur-[100px]"/>
                     <img className="h-full w-full rounded-xl object-cover"
                         src={lipsiticks}
                         alt="Velour Lipsticks"/>
-                </div>
+                </motion.div>
 
                 <div>
                     <motion.p initial={

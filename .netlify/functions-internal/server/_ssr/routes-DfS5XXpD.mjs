@@ -1,10 +1,10 @@
 import { o as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { t as Lenis } from "../_libs/lenis.mjs";
+import { t as gsapWithCSS } from "../_libs/gsap.mjs";
 import { i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion } from "../_libs/motion.mjs";
-import { t as gsapWithCSS } from "../_libs/gsap.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DVZj01gZ.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DfS5XXpD.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function SmoothScroll({ children }) {
@@ -16,14 +16,13 @@ function SmoothScroll({ children }) {
 			smoothWheel: true,
 			touchMultiplier: 1.6
 		});
-		let raf = 0;
-		const loop = (time) => {
-			lenis.raf(time);
-			raf = requestAnimationFrame(loop);
+		const updateLenis = (time) => {
+			lenis.raf(time * 1e3);
 		};
-		raf = requestAnimationFrame(loop);
+		gsapWithCSS.ticker.add(updateLenis);
+		gsapWithCSS.ticker.lagSmoothing(0);
 		return () => {
-			cancelAnimationFrame(raf);
+			gsapWithCSS.ticker.remove(updateLenis);
 			lenis.destroy();
 		};
 	}, []);
@@ -458,9 +457,9 @@ function ModelGallery() {
 			const scrollY = window.scrollY;
 			const delta = Math.abs(scrollY - lastScrollY);
 			lastScrollY = scrollY;
-			targetTimeScale = 1 + delta * .15;
-			if (targetTimeScale > 4.5) targetTimeScale = 4.5;
-			const lerpFactor = targetTimeScale > currentTimeScale ? .15 : .05;
+			targetTimeScale = 1 + delta * .04;
+			if (targetTimeScale > 2.5) targetTimeScale = 2.5;
+			const lerpFactor = targetTimeScale > currentTimeScale ? .05 : .02;
 			currentTimeScale += (targetTimeScale - currentTimeScale) * lerpFactor;
 			if (tweenRef.current) tweenRef.current.timeScale(currentTimeScale);
 			rafId = requestAnimationFrame(update);
@@ -502,7 +501,7 @@ function ModelGallery() {
 				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				ref: ringRef,
-				className: "relative h-[300px] w-[210px] md:h-[400px] md:w-[280px] [transform-style:preserve-3d]",
+				className: "relative h-[300px] w-[210px] md:h-[400px] md:w-[280px] [transform-style:preserve-3d] will-change-transform",
 				children: models.map((model, i) => {
 					return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						className: "absolute inset-0",
@@ -668,7 +667,23 @@ function About() {
 							})
 						]
 					})
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+					initial: {
+						opacity: 0,
+						scale: .95
+					},
+					whileInView: {
+						opacity: 1,
+						scale: 1
+					},
+					transition: {
+						duration: .8,
+						ease: "easeOut"
+					},
+					viewport: {
+						once: true,
+						margin: "-10%"
+					},
 					className: "relative h-[440px] overflow-hidden rounded-3xl md:h-[620px]",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.img, {
@@ -1048,7 +1063,23 @@ function Ritual() {
 		className: "relative w-full overflow-hidden py-24 md:py-36",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+				initial: {
+					opacity: 0,
+					x: -30
+				},
+				whileInView: {
+					opacity: 1,
+					x: 0
+				},
+				transition: {
+					duration: .8,
+					ease: "easeOut"
+				},
+				viewport: {
+					once: true,
+					margin: "-10%"
+				},
 				className: "relative h-[360px] md:h-[560px]",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-primary/10 blur-[100px]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 					className: "h-full w-full rounded-xl object-cover",

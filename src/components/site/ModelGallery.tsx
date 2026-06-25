@@ -95,14 +95,12 @@ export function ModelGallery() {
       const delta = Math.abs(scrollY - lastScrollY);
       lastScrollY = scrollY;
 
-      // Calculate target speed based on how fast we are scrolling.
-      targetTimeScale = 1 + delta * 0.15;
-      
-      // Cap the maximum speed boost to prevent it from looking chaotic
-      if (targetTimeScale > 4.5) targetTimeScale = 4.5;
+      // Calculate target speed: gentler multiplier and lower cap for smoothness
+      targetTimeScale = 1 + delta * 0.04;
+      if (targetTimeScale > 2.5) targetTimeScale = 2.5;
 
-      // Use a faster lerp when accelerating, and a slower lerp when decelerating
-      const lerpFactor = targetTimeScale > currentTimeScale ? 0.15 : 0.05;
+      // Very subtle lerp factors to remove any stutter
+      const lerpFactor = targetTimeScale > currentTimeScale ? 0.05 : 0.02;
       currentTimeScale += (targetTimeScale - currentTimeScale) * lerpFactor;
 
       if (tweenRef.current) {
@@ -153,7 +151,7 @@ export function ModelGallery() {
         <div 
           ref={ringRef} 
           // Slightly smaller image sizes as requested
-          className="relative h-[300px] w-[210px] md:h-[400px] md:w-[280px] [transform-style:preserve-3d]"
+          className="relative h-[300px] w-[210px] md:h-[400px] md:w-[280px] [transform-style:preserve-3d] will-change-transform"
         >
           {models.map((model, i) => {
             const angle = (360 / models.length) * i;

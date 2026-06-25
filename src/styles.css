@@ -144,6 +144,7 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    overscroll-behavior: none; /* Prevents mac rubber-banding for a premium feel */
   }
 
   ::selection {

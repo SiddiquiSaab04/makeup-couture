@@ -1,5 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import Lenis from "lenis";
+import { gsap } from "gsap";
 
 export function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
@@ -13,15 +14,16 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       touchMultiplier: 1.6,
     });
 
-    let raf = 0;
-    const loop = (time: number) => {
-      lenis.raf(time);
-      raf = requestAnimationFrame(loop);
+    // Sync GSAP's ticker with Lenis for perfectly buttery, stutter-free animations
+    const updateLenis = (time: number) => {
+      lenis.raf(time * 1000);
     };
-    raf = requestAnimationFrame(loop);
+    
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(raf);
+      gsap.ticker.remove(updateLenis);
       lenis.destroy();
     };
   }, []);

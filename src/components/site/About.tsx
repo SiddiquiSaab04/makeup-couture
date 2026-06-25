@@ -204,7 +204,13 @@ export function About() {
                 </motion.div>
 
                 {/* Right — parallax image */}
-                <div className="relative h-[440px] overflow-hidden rounded-3xl md:h-[620px]">
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    className="relative h-[440px] overflow-hidden rounded-3xl md:h-[620px]"
+                >
                     <motion.img style={
                             {
                                 y: imageY,
@@ -219,7 +225,7 @@ export function About() {
                         height={1536}/>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/50 to-transparent"/>
                     <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-border"/>
-                </div>
+                </motion.div>
             </div>
 
             {/* Horizontal-scrolling cast of muses */}
