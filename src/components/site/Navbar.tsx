@@ -53,7 +53,7 @@ export function Navbar() {
 
         <a
           href="#products"
-          className="rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-transform duration-300 hover:scale-[1.04]"
+          className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-sm border transition-transform duration-300 hover:scale-[1.04]"
         >
           Shop
         </a>

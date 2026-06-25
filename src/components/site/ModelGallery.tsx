@@ -55,7 +55,7 @@ function ModelCard({
 
         {/* caption slides up on hover */}
         <div className="absolute inset-x-5 bottom-5">
-          <p className="translate-y-2 text-[10px] uppercase tracking-[0.35em] text-secondary opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+          <p className="translate-y-2 text-[10px] uppercase tracking-[0.35em] text-secondary opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 font-accent">
             {model.role}
           </p>
           <h3 className="font-display text-3xl font-extrabold leading-none text-foreground">
@@ -126,7 +126,7 @@ export function ModelGallery() {
       <div className="mx-auto mb-10 max-w-7xl px-6 md:mb-14">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary">
+            <p className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary font-accent">
               Our Faces
             </p>
             <h2 className="font-display text-4xl font-extrabold leading-[1.04] md:text-6xl">

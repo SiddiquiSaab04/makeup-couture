@@ -49,7 +49,7 @@ export function Products() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true, margin: "-10%" }}
-              className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary"
+              className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary font-accent"
             >
               The Collection
             </motion.p>
@@ -124,7 +124,7 @@ export function Products() {
                     <span className="font-display text-2xl font-bold transition-all duration-300 group-hover:translate-x-2 group-hover:text-primary md:text-4xl">
                       {p.name}
                     </span>
-                    <span className="text-xs uppercase tracking-widest text-muted-foreground">
+                    <span className="text-xs uppercase tracking-widest text-secondary font-accent font-bold">
                       {p.category}
                     </span>
                   </span>
@@ -137,7 +137,7 @@ export function Products() {
                       loading="lazy"
                       className="h-12 w-12 object-contain lg:hidden"
                     />
-                    <span className="font-display text-lg font-bold text-foreground md:text-xl">
+                    <span className="text-lg font-bold text-neon-primary md:text-xl font-accent">
                       {p.price}
                     </span>
                   </span>

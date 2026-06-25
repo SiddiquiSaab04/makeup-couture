@@ -44,11 +44,11 @@ export function Hero() {
                     Luxury Beauty Collection
                 </motion.p>
 
-                <h1 className="font-display text-[clamp(3rem,11vw,11rem)] font-extrabold leading-[0.85] tracking-tight">
+                <h1 className="font-display text-[clamp(4rem,12vw,14rem)] font-extrabold leading-[0.8] tracking-tight flex flex-col md:flex-row md:items-baseline md:gap-6">
                     {
                     ["Beauty," ,"Redefined"].map((line, i) => (
                         <span key={line}
-                            className="block overflow-hidden">
+                            className="block overflow-visible pb-4">
                             <motion.span initial={
                                     {y: "110%"}
                                 }
@@ -63,7 +63,7 @@ export function Hero() {
                                     }
                                 }
                                 className={
-                                    i === 1 ? "inline-block neon-gradient-text text-glow" : "inline-block"
+                                    i === 1 ? "inline-block font-accent font-normal text-[clamp(4.5rem,14vw,16rem)] text-primary drop-shadow-[0_0_35px_rgba(255,45,149,0.9)]  pl-4 md:pl-0" : "inline-block text-foreground drop-shadow-2xl"
                             }>
                                 {line} </motion.span>
                         </span>

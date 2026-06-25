@@ -80,7 +80,7 @@ function StackCard({
             className="absolute inset-0 h-full w-full rounded-xl scale-[1.02] object-cover p-5  drop-shadow-[0_30px_60px_oklch(0.68_0.27_356/0.45)] transition-transform duration-700 ease-out group-hover:scale-[1.12] group-hover:-rotate-3"
           />
           <div className="absolute bottom-5 left-5 z-20 translate-y-3 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-            <span className="rounded-full bg-primary px-5 py-2 text-xs font-semibold uppercase tracking-widest text-primary-foreground shadow-[var(--glow-neon)]">
+            <span className="rounded-full bg-primary px-6 py-2.5 text-base font-semibold uppercase tracking-widest text-primary-foreground shadow-[var(--glow-neon)]">
               {row.tag} →
             </span>
           </div>
@@ -88,7 +88,7 @@ function StackCard({
 
         {/* Content */}
         <div className={reverse ? "md:pr-4" : "md:pl-4"}>
-          <p className="mb-4 text-xs uppercase tracking-[0.35em] text-secondary">
+          <p className="mb-4 text-xs uppercase font-accent tracking-[0.35em] text-secondary">
             {row.eyebrow}
           </p>
           <h3 className="font-display text-3xl font-extrabold leading-[1.05] md:text-5xl">
@@ -99,7 +99,7 @@ function StackCard({
           </p>
           <a
             href="#products"
-            className="story-link mt-7 inline-flex text-sm font-semibold uppercase tracking-widest text-foreground"
+            className="story-link mt-7 inline-flex text-sm font-semibold uppercase tracking-widest text-foreground font-accent"
           >
             {row.tag}
           </a>
@@ -123,7 +123,7 @@ export function Spotlight() {
     <section id="spotlight" className="relative w-full">
       <div className="mx-auto max-w-7xl px-6 pt-24 md:pt-36">
         <div className="mb-12 max-w-2xl md:mb-16">
-          <p className="mb-5 text-xs uppercase tracking-[0.35em] text-secondary">
+          <p className="mb-5 text-xs uppercase tracking-[0.35em] text-secondary font-accent">
             The Collection
           </p>
           <h2 className="font-display text-4xl font-extrabold leading-[1.04] md:text-6xl">

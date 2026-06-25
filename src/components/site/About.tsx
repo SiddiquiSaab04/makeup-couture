@@ -41,7 +41,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
               viewport={{ once: true, margin: "-10%" }}
-              className="mb-5 text-xs uppercase tracking-[0.35em] text-secondary"
+              className="mb-5 text-xs uppercase tracking-[0.35em] text-secondary font-accent"
             >
               The House
             </motion.p>
